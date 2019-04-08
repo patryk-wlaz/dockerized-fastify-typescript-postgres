@@ -1,6 +1,7 @@
 import * as fastifyFactory from 'fastify';
 import * as fastifyRateLimit from 'fastify-rate-limit';
 import * as helmet from 'fastify-helmet';
+import errorHandler from './common/error-handler';
 
 // error handler
 // swagger
@@ -19,10 +20,15 @@ fastify.register(fastifyRateLimit, {
 });
 fastify.register(helmet);
 
+fastify.setErrorHandler(errorHandler);
+
 // router
 
 fastify.get('/', async (request, reply) => {
   return { hello: 'world' };
+});
+fastify.get('/error', async (request, reply) => {
+  throw new Error('gówno');
 });
 
 const start = async () => {
