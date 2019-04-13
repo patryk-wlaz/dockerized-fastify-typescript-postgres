@@ -1,13 +1,9 @@
 import * as fastifyFactory from 'fastify';
 import * as fastifyRateLimit from 'fastify-rate-limit';
 import * as helmet from 'fastify-helmet';
+import * as _ from 'lodash';
 import errorHandler from './common/error-handler';
-
-// error handler
-// swagger
-// if (!includes(['prod', 'production'], process.env.NODE_ENV)) {
-//   setupSwagger(app);
-// }
+import { setupSwagger } from './common/swagger';
 
 const fastify = fastifyFactory({
   logger: true,
@@ -30,6 +26,11 @@ fastify.get('/', async (request, reply) => {
 fastify.get('/error', async (request, reply) => {
   throw new Error('gówno');
 });
+
+// if (_.includes(['dev', 'development'], process.env.NODE_ENV)) {
+if (true) {
+  setupSwagger(fastify);
+}
 
 const start = async () => {
   try {
