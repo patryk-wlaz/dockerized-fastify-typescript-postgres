@@ -4,6 +4,9 @@ FROM node:11.14.0-alpine
 ARG ROOT_PATH=/var/www/app
 RUN mkdir -p $ROOT_PATH
 
+# set env
+ENV NODE_ENV=dev
+
 # Define working directory
 WORKDIR $ROOT_PATH
 
@@ -11,17 +14,7 @@ WORKDIR $ROOT_PATH
 COPY package*.json ./
 RUN npm install
 
-# set env after npm i to get also dev deps
-ENV NODE_ENV=production
-
-# Copy app directory into app
-COPY . .
-
-# Build app
-RUN npm run build
-
-# uninstall dev dependencies after build
-RUN npm prune
+# No copy, we use volumes for development
 
 # Expose port used by app
 EXPOSE $PORT
@@ -30,4 +23,4 @@ EXPOSE $PORT
 USER node
 
 # Run app
-CMD ["npm", "run", "prod"]
+CMD ["npm", "run", "dev"]

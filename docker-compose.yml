@@ -1,0 +1,23 @@
+version: '3'
+services:
+  db:
+    image: postgres:11.1-alpine
+    volumes:
+      - ${POSTGRES_STORAGE_PATH}:/var/lib/postgresql/data
+    env_file:
+      - .env
+    environment:
+      - PGDATA=/var/lib/postgresql/data/pgdata
+  backend:
+    build:
+      context: .
+      dockerfile: ./Dockerfile-dev
+      args:
+        PORT: ${PORT}
+    volumes:
+      - /var/www/app/node_modules
+      - ./:/var/www/app
+    ports:
+      - ${PORT}:${PORT}
+    env_file:
+      - .env

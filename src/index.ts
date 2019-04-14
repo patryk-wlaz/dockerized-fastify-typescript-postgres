@@ -4,37 +4,27 @@ import * as helmet from 'fastify-helmet';
 import * as _ from 'lodash';
 import errorHandler from './common/error-handler';
 import { setupSwagger } from './common/swagger';
+import { fastifyRateLimitOpts } from './common/config';
+import { setupRoutes } from './setup-routes';
 
 const fastify = fastifyFactory({
   logger: true,
 });
 
-// ogólne pluginy (config!)
-fastify.register(fastifyRateLimit, {
-  max: 100,
-  timeWindow: 1000,
-});
+fastify.register(fastifyRateLimit, fastifyRateLimitOpts);
 fastify.register(helmet);
 
 fastify.setErrorHandler(errorHandler);
 
-// router
+setupRoutes(fastify);
 
-fastify.get('/', async (request, reply) => {
-  return { hello: 'world' };
-});
-fastify.get('/error', async (request, reply) => {
-  throw new Error('gówno');
-});
-
-// if (_.includes(['dev', 'development'], process.env.NODE_ENV)) {
-if (true) {
+if (_.includes(['dev', 'development'], process.env.NODE_ENV)) {
   setupSwagger(fastify);
 }
 
 const start = async () => {
   try {
-    await fastify.listen(8000);
+    await fastify.listen(process.env.PORT);
   } catch (err) {
     fastify.log.error(err);
     process.exit(1);
