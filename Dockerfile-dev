@@ -20,7 +20,7 @@ RUN npm install
 EXPOSE $PORT
 
 # Run app as non root user due to security reasons
-USER node
+#USER node
 
 # Run app
 CMD ["npm", "run", "dev"]

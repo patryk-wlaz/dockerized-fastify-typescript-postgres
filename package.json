@@ -6,7 +6,9 @@
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "dev": "nodemon",
-    "prod": "node ./dist/index.js"
+    "prod": "node ./dist/index.js",
+    "migration:create": "node node_modules/db-migrate/bin/db-migrate create --config migrations/config.json",
+    "migration:up": "node node_modules/db-migrate/bin/db-migrate up --config migrations/config.json"
   },
   "author": "",
   "license": "ISC",
@@ -20,6 +22,7 @@
   },
   "dependencies": {
     "db-migrate": "^0.11.5",
+    "db-migrate-pg": "^0.5.0",
     "fastify": "^2.2.0",
     "fastify-helmet": "^3.0.0",
     "fastify-rate-limit": "^2.1.0",
