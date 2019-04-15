@@ -7,12 +7,7 @@ exports.up = function(db) {
     'users',
     {
       columns: {
-        id: {
-          type: 'int',
-          primaryKey: true,
-          unique: true,
-          notNull: true,
-        },
+        ...helpers.id,
         name: {
           type: 'string',
           length: 50,
@@ -30,6 +25,7 @@ exports.up = function(db) {
         },
         privilegesChangedAt: {
           type: 'timestamp',
+          notNull: true,
           defaultValue: 'Thu Jan 1 00:00:00 1970',
         },
         ...helpers.manipulationSchema,

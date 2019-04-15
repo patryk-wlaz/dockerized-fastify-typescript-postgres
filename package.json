@@ -4,11 +4,13 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
+    "docker": "docker-compose up --build",
     "build": "tsc -p tsconfig.build.json",
     "dev": "nodemon",
     "prod": "node ./dist/index.js",
     "migration:create": "node node_modules/db-migrate/bin/db-migrate create --config migrations/config.json",
-    "migration:up": "node node_modules/db-migrate/bin/db-migrate up --config migrations/config.json"
+    "migration:up": "node node_modules/db-migrate/bin/db-migrate up --config migrations/config.json",
+    "migration:down": "node node_modules/db-migrate/bin/db-migrate down --config migrations/config.json"
   },
   "author": "",
   "license": "ISC",

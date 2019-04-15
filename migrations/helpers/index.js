@@ -1,8 +1,4 @@
-const generateId = () => parseInt(crypto.randomBytes(3).toString('hex'), 16);
-
-const getCurrentTimestamp = () => Date.now();
-
-const manipulationSchema = {
+const timeManipulationSchema = {
   createdAt: {
     type: 'timestamp',
     notNull: true,
@@ -11,6 +7,10 @@ const manipulationSchema = {
     type: 'timestamp',
     notNull: true,
   },
+};
+
+const manipulationSchema = {
+  ...timeManipulationSchema,
   createdBy: {
     type: 'int',
   },
@@ -19,8 +19,17 @@ const manipulationSchema = {
   },
 };
 
+const id =  {
+  id: {
+    type: 'int',
+    primaryKey: true,
+    unique: true,
+    notNull: true,
+  },
+};
+
 module.exports = {
-  generateId,
-  getCurrentTimestamp,
+  timeManipulationSchema,
   manipulationSchema,
+  id,
 };
