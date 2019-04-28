@@ -1,10 +1,12 @@
 'use strict';
 const helpers = require('./helpers');
+const tableName = 'deals';
+
 
 exports.up = function(db) {
 
   return db.createTable(
-    'deals',
+    tableName,
     {
       columns: {
         ...helpers.id,
@@ -38,9 +40,7 @@ exports.up = function(db) {
           foreignKey: {
             name: 'deal_taker_id_fk',
             table: 'users',
-            mapping: {
-              takerId: 'id',
-            },
+            mapping: 'id',
             rules: {
               onDelete: 'CASCADE',
               onUpdate: 'RESTRICT'
@@ -55,7 +55,7 @@ exports.up = function(db) {
 };
 
 exports.down = function(db) {
-  return db.dropTable('deals');
+  return db.dropTable(tableName);
 };
 
 exports._meta = {

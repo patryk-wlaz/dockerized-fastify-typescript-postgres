@@ -9,15 +9,33 @@ const timeManipulationSchema = {
   },
 };
 
-const manipulationSchema = {
+const manipulationSchema = entityName => ({
   ...timeManipulationSchema,
   createdBy: {
     type: 'int',
+    foreignKey: {
+      name: `${entityName}_creator_id_fk`,
+      table: 'users',
+      mapping: 'id',
+      rules: {
+        onDelete: 'CASCADE',
+        onUpdate: 'RESTRICT'
+      },
+    }
   },
   updatedBy: {
     type: 'int',
+    foreignKey: {
+      name: `${entityName}_updater_id_fk`,
+      table: 'users',
+      mapping: 'id',
+      rules: {
+        onDelete: 'CASCADE',
+        onUpdate: 'RESTRICT'
+      },
+    }
   },
-};
+});
 
 const id =  {
   id: {

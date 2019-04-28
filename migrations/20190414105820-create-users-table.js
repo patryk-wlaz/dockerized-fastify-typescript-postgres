@@ -1,10 +1,11 @@
 'use strict';
 const helpers = require('./helpers');
+const tableName = 'users';
 
 exports.up = function(db) {
 
   return db.createTable(
-    'users',
+    tableName,
     {
       columns: {
         ...helpers.id,
@@ -28,7 +29,7 @@ exports.up = function(db) {
           notNull: true,
           defaultValue: 'Thu Jan 1 00:00:00 1970',
         },
-        ...helpers.manipulationSchema,
+        ...helpers.manipulationSchema(tableName),
       },
       ifNotExists: true,
     },
@@ -36,7 +37,7 @@ exports.up = function(db) {
 };
 
 exports.down = function(db) {
-  return db.dropTable('users');
+  return db.dropTable(tableName);
 };
 
 exports._meta = {
