@@ -1,6 +1,6 @@
 'use strict';
 const helpers = require('./helpers');
-const tableName = 'offers';
+const tableName = 'users_roles';
 
 exports.up = function(db) {
 
@@ -9,26 +9,11 @@ exports.up = function(db) {
     {
       columns: {
         ...helpers.id,
-        take_offers_until: {
-          type: 'timestamp',
-        },
-        will_be_resolved_until: {
-          type: 'timestamp',
-        },
-        // localization: { type geography is avalaible in postgis but not in d_migrate lib
-        //   type: 'geography',
-        // },
-        proposal: {
-          type: 'int',
-        },
-        description: {
-          type: 'string',
-        },
-        order_id: {
+        user_id: {
           type: 'int',
           foreignKey: {
-            name: 'offers_order_id_fk',
-            table: 'orders',
+            name: 'users_roles_user_id_fk',
+            table: 'users',
             mapping: 'id',
             rules: {
               onDelete: 'CASCADE',
@@ -36,7 +21,19 @@ exports.up = function(db) {
             },
           }
         },
-        ...helpers.timeManipulationSchema,
+        role_id: {
+          type: 'int',
+          foreignKey: {
+            name: 'users_roles_role_id_fk',
+            table: 'roles',
+            mapping: 'id',
+            rules: {
+              onDelete: 'CASCADE',
+              onUpdate: 'RESTRICT'
+            },
+          }
+        },
+        ...helpers.manipulationSchema,
       },
       ifNotExists: true,
     },

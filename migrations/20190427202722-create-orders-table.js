@@ -15,7 +15,7 @@ exports.up = function(db) {
         will_be_resolved_until: {
           type: 'timestamp',
         },
-        // localization: { typ geography is avalaible in postgis but not in d-migrate lib
+        // localization: { type geography is avalaible in postgis but not in d_migrate lib
         //   type: 'geography',
         // },
         reward: {

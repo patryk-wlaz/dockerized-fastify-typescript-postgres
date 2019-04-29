@@ -8,8 +8,8 @@ exports.up = function(db) {
     tableName,
     {
       columns: {
-        ...helpers.id, // id the same as in user, because it is one-to-one relation
-        // center: { type geography is avalaible in postgis but not in d-migrate lib
+        ...helpers.id, // id the same as in user, because it is one_to_one relation
+        // center: { type geography is avalaible in postgis but not in d_migrate lib
         //   type: 'geography',
         // },
         radius: {

@@ -21,13 +21,13 @@ exports.up = function(db) {
         offer_description: {
           type: 'string',
         },
-        ordererId: {
+        orderer_id: {
           type: 'int',
           foreignKey: {
             name: 'deal_orderer_id_fk',
             table: 'users',
             mapping: {
-              ordererId: 'id',
+              orderer_id: 'id',
             },
             rules: {
               onDelete: 'CASCADE',
@@ -35,7 +35,7 @@ exports.up = function(db) {
             },
           }
         },
-        takerId: {
+        taker_id: {
           type: 'int',
           foreignKey: {
             name: 'deal_taker_id_fk',

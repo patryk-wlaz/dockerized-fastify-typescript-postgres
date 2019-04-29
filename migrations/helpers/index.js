@@ -1,9 +1,9 @@
 const timeManipulationSchema = {
-  createdAt: {
+  created_at: {
     type: 'timestamp',
     notNull: true,
   },
-  updatedAt: {
+  updated_at: {
     type: 'timestamp',
     notNull: true,
   },
@@ -11,24 +11,28 @@ const timeManipulationSchema = {
 
 const manipulationSchema = entityName => ({
   ...timeManipulationSchema,
-  createdBy: {
+  created_by: {
     type: 'int',
     foreignKey: {
       name: `${entityName}_creator_id_fk`,
       table: 'users',
-      mapping: 'id',
+      mapping: { 
+        created_by: 'id',
+      },
       rules: {
         onDelete: 'CASCADE',
         onUpdate: 'RESTRICT'
       },
     }
   },
-  updatedBy: {
+  updated_by: {
     type: 'int',
     foreignKey: {
       name: `${entityName}_updater_id_fk`,
       table: 'users',
-      mapping: 'id',
+      mapping: { 
+        updated_by: 'id',
+      },
       rules: {
         onDelete: 'CASCADE',
         onUpdate: 'RESTRICT'

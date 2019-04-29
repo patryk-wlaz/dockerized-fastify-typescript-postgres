@@ -19,12 +19,12 @@ exports.up = function(db) {
           notNull: true,
           length: 100,
         },
-        passwordHash: {
+        password_hash: {
           type: 'string',
           length: 120,
           notNull: true,
         },
-        privilegesChangedAt: {
+        privileges_change_at: {
           type: 'timestamp',
           notNull: true,
           defaultValue: 'Thu Jan 1 00:00:00 1970',
